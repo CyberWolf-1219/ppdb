@@ -1,0 +1,321 @@
+---
+import Navigation from '../components/Navigation/Navigation';
+import Footer from '../components/Footer/Footer';
+
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang='en'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta
+      name='description'
+      content='Astro description'
+    />
+    <meta
+      name='viewport'
+      content='width=device-width'
+    />
+    <link
+      rel='icon'
+      type='image/svg+xml'
+      href='/favicon.svg'
+    />
+    <meta
+      name='generator'
+      content={Astro.generator}
+    />
+
+    <title>{title}</title>
+    <link
+      rel='preconnect'
+      href='https://fonts.googleapis.com'
+    />
+    <link
+      rel='preconnect'
+      href='https://fonts.gstatic.com'
+      crossorigin
+    />
+    <link
+      href='https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap'
+      rel='stylesheet'
+    />
+  </head>
+  <body>
+    <Navigation />
+    <slot />
+    <Footer />
+  </body>
+</html>
+<style is:global>
+  :root {
+    --accent: #19ace6;
+    --primary: #ffffff;
+    --secondary: #2c2c2c;
+    --text: rgba(0, 0, 0, 0.8);
+  }
+  html {
+    background: var(--primary);
+  }
+  body {
+    background: var(--primary);
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 400;
+    line-height: 1.75;
+    color: var(--text);
+  }
+  main {
+    margin: auto;
+    padding: 1rem;
+    width: 100%;
+  }
+  section {
+    widht: 100%;
+    height: fit-content;
+    padding: 5rem 2rem;
+  }
+
+  section > div {
+    width: 100%;
+    max-width: 1280px;
+    height: fit-content;
+
+    margin: 0px auto;
+  }
+
+  nav > div {
+    width: 100%;
+    max-width: 1280px;
+    height: fit-content;
+
+    margin: 0px auto;
+  }
+
+  footer > div {
+    width: 100%;
+    max-width: 1280px;
+    height: fit-content;
+
+    margin: 0px auto;
+  }
+
+  p {
+    margin-bottom: 1rem !important;
+    color: var(--text);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    margin: 3rem 0 1.38rem !important;
+    font-family: 'Comfortaa', sans-serif;
+    font-weight: 400;
+    line-height: 1.3 !important;
+  }
+
+  h1 {
+    font-weight: 700 !important;
+  }
+
+  h2 {
+    font-weight: 600 !important;
+  }
+  h3 {
+    font-weight: 400 !important;
+  }
+
+  img {
+    background-color: #1c1c1c;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --accent: #10aae7;
+      --primary: #1a1a1a;
+      --secondary: #fafafa;
+      --text: rgba(255, 255, 255, 1);
+    }
+    * {
+      color-scheme: dark;
+    }
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --accent: #10aae7;
+      --primary: #fafafa;
+      --secondary: #1a1a1a;
+      --text: rgba(0, 0, 0, 1);
+    }
+    * {
+      color-scheme: light;
+    }
+  }
+
+  /* For extremely small screen devices (595px and below) */
+  @media only screen and (max-width: 595px) {
+    html {
+      font-size: 100%;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 1.802rem !important;
+    }
+
+    h2 {
+      font-size: 1.602rem !important;
+    }
+
+    h3 {
+      font-size: 1.424rem !important;
+    }
+
+    h4 {
+      font-size: 1.266rem !important;
+    }
+
+    h5 {
+      font-size: 1.125rem !important;
+    }
+
+    small,
+    .text_small {
+      font-size: 0.889rem;
+    }
+  }
+
+  /* Small screen devices (600px and above) */
+  @media only screen and (min-width: 640px) {
+    html {
+      font-size: 100%;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 1.802rem !important;
+    }
+
+    h2 {
+      font-size: 1.602rem !important;
+    }
+
+    h3 {
+      font-size: 1.424rem !important;
+    }
+
+    h4 {
+      font-size: 1.266rem !important;
+    }
+
+    h5 {
+      font-size: 1.125rem !important;
+    }
+
+    small,
+    .text_small {
+      font-size: 0.889rem !important;
+    }
+  }
+
+  /* Medium screen devices (768px and above) */
+  @media only screen and (min-width: 768px) {
+    html {
+      font-size: 100%;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 2.488rem !important;
+    }
+
+    h2 {
+      font-size: 2.074rem !important;
+    }
+
+    h3 {
+      font-size: 1.728rem !important;
+    }
+
+    h4 {
+      font-size: 1.44rem !important;
+    }
+
+    h5 {
+      font-size: 1.2rem !important;
+    }
+
+    small,
+    .text_small {
+      font-size: 0.833rem !important;
+    }
+  }
+
+  /* Big screen devices (889px and above) */
+  @media only screen and (min-width: 1024px) {
+    html {
+      font-size: 100%;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 3.052rem !important;
+    }
+
+    h2 {
+      font-size: 2.441rem !important;
+    }
+
+    h3 {
+      font-size: 1.953rem !important;
+    }
+
+    h4 {
+      font-size: 1.563rem !important;
+    }
+
+    h5 {
+      font-size: 1.25rem !important;
+    }
+
+    small,
+    .text_small {
+      font-size: 0.8rem !important;
+    }
+  }
+
+  /* Extra big screen devices (1200px and above) */
+  /* @media only screen and (min-width: 1280px) {
+    html {
+      font-size: 100%;
+    }
+    h1 {
+      margin-top: 0;
+      font-size: 7.594rem !important;
+    }
+
+    h2 {
+      font-size: 5.063rem !important;
+    }
+
+    h3 {
+      font-size: 3.375rem !important;
+    }
+
+    h4 {
+      font-size: 2.25rem !important;
+    }
+
+    h5 {
+      font-size: 1.5rem !important;
+    }
+
+    small,
+    .text_small {
+      font-size: 0.667rem !important;
+    }
+  } */
+</style>
