@@ -23,11 +23,11 @@
 
 ### Final
 
-- [ ] homepage
-  - [ ] navigation
-  - [ ] hero section
-  - [ ] search section
-  - [ ] footer
+- [X] homepage
+  - [X] navigation
+  - [X] hero section
+  - [X] search section
+  - [X] footer
 - [ ] upload page
   - [ ] hero section
   - [ ] upload form
