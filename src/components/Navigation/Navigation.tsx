@@ -1,35 +1,45 @@
 import React from 'react';
 import Logo from '../Logo/Logo';
+import Button from '../Button/Button';
 
 function Navigation() {
   return (
-    <nav className={'w-full h-fit px-[1rem] py-[2rem] border-b-[2px]'}>
-      <div className={'flex flex-row items-center justify-between'}>
+    <nav className={'w-full h-fit px-[1rem] py-[1rem] border-b-[2px]'}>
+      <div className={'flex flex-col md:flex-row items-center justify-between'}>
         <Logo />
-        <ul className={'flex flex-row items-center justify-center gap-[1rem]'}>
-          <li>
-            <button
-              className={
-                'w-fit h-fit px-[1em] py-[0.75em] border-[2px] border-pallet-accent text-pallet-accent font-bold'
-              }>
-              Register
-            </button>
-          </li>
-          <li>
-            <button
-              className={
-                'w-fit h-fit px-[1em] py-[0.75em] border-[2px] border-pallet-accent text-pallet-accent font-bold'
-              }>
-              Login
-            </button>
-          </li>
-          <li>
-            <button
-              className={
-                'w-fit h-fit px-[1em] py-[0.75em] bg-pallet-accent text-pallet-light font-bold'
-              }>
-              UPLOAD
-            </button>
+        <ul
+          className={
+            'w-full md:max-w-[50%] lg:max-w-[40%] mt-[1rem] md:m-[0] flex flex-col md:flex-row items-center justify-center gap-[1rem]'
+          }>
+          <div className={'w-full h-fit flex flex-row item-center gap-[1rem]'}>
+            <li className={'w-full'}>
+              <Button
+                type={'secondary'}
+                width={'full'}
+                textSize={'md'}
+                action={() => {}}>
+                Register
+              </Button>
+            </li>
+            <li className={'w-full'}>
+              <Button
+                type={'secondary'}
+                width={'full'}
+                textSize={'md'}
+                action={() => {}}>
+                Login
+              </Button>
+            </li>
+          </div>
+          <li className={'w-full'}>
+            <Button
+              type={'primary'}
+              width={'full'}
+              textSize={'md'}
+              fontWeight={'bold'}
+              action={() => {}}>
+              Upload
+            </Button>
           </li>
         </ul>
       </div>

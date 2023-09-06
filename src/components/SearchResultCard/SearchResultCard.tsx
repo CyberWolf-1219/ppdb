@@ -7,20 +7,29 @@ interface Props {
 
 function SearchResultCard({ imageLink, downloadLink }: Props) {
   return (
-    <article className={'aspect-[3/4] w-full h-auto shadow-md shadow-black/30'}>
+    <article
+      className={
+        'w-full h-fit shadow-md shadow-black/30 bg-pallet-light rounded-sm overflow-hidden'
+      }>
       <img
         src={imageLink}
-        alt=''
-        width='320'
-        height='400'
+        alt='Exam paper preview image'
+        className={
+          'aspect-[3/3.5] w-full h-auto object-contain bg-black/20 text-center'
+        }
       />
       <div className={'w-full h-fit'}>
-        <p className={'mt-[1rem] text-xl font-bold text-center'}>
+        <p
+          className={
+            'mt-[1rem] text-base font-bold text-center text-pallet-dark'
+          }>
           Year/Exam/Subject
         </p>
         <Button
           type={'primary'}
           width={'full'}
+          height={'fit'}
+          textSize={'md'}
           action={() => {}}>
           Download
         </Button>
