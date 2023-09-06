@@ -54,9 +54,9 @@ const { title } = Astro.props;
 </html>
 <style is:global>
   :root {
-    --accent: #19ace6;
-    --primary: #ffffff;
-    --secondary: #2c2c2c;
+    --accent: hsl(197, 90%, 50%);
+    --primary: hsl(0, 0%, 100%);
+    --secondary: hsl(0, 0%, 17%);
     --text: rgba(0, 0, 0, 0.8);
   }
   html {
@@ -70,8 +70,6 @@ const { title } = Astro.props;
     color: var(--text);
   }
   main {
-    margin: auto;
-    padding: 1rem;
     width: 100%;
   }
   section {
@@ -130,11 +128,7 @@ const { title } = Astro.props;
   h3 {
     font-weight: 400 !important;
   }
-
-  img {
-    background-color: #1c1c1c;
-  }
-
+  /* 
   @media (prefers-color-scheme: dark) {
     :root {
       --accent: #10aae7;
@@ -157,10 +151,10 @@ const { title } = Astro.props;
     * {
       color-scheme: light;
     }
-  }
+  } */
 
   /* For extremely small screen devices (595px and below) */
-  @media only screen and (max-width: 595px) {
+  @media only screen and (max-width: 375px) {
     html {
       font-size: 100%;
     }
@@ -189,10 +183,13 @@ const { title } = Astro.props;
     .text_small {
       font-size: 0.889rem;
     }
+    section {
+      padding: 2rem 1rem;
+    }
   }
 
   /* Small screen devices (600px and above) */
-  @media only screen and (min-width: 640px) {
+  @media only screen and (min-width: 375px) {
     html {
       font-size: 100%;
     }
@@ -220,6 +217,9 @@ const { title } = Astro.props;
     small,
     .text_small {
       font-size: 0.889rem !important;
+    }
+    section {
+      padding: 2rem 1rem;
     }
   }
 
@@ -253,6 +253,9 @@ const { title } = Astro.props;
     .text_small {
       font-size: 0.833rem !important;
     }
+    section {
+      padding: 2rem 1rem;
+    }
   }
 
   /* Big screen devices (889px and above) */
@@ -284,6 +287,9 @@ const { title } = Astro.props;
     small,
     .text_small {
       font-size: 0.8rem !important;
+    }
+    section {
+      padding: 2rem 1rem;
     }
   }
 

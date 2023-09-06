@@ -5,9 +5,9 @@ module.exports = {
     extend: {
       colors: {
         pallet: {
-          light: '#ffffff',
-          dark: '#2C2C2C',
-          accent: '#19ace6',
+          light: 'hsl(0, 0%, 100%)',
+          dark: 'hsl(0, 0%, 17%)',
+          accent: 'hsl(197, 90%, 50%)',
         },
       },
     },
