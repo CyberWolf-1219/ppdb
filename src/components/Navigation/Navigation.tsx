@@ -5,6 +5,7 @@ import Portal from '../Portal/Portal';
 import ModalBG from '../ModalBG/ModalBG';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 import LoginForm from '../LoginForm/LoginForm';
+import UploadForm from '../UploadForm/UploadForm';
 
 function Navigation() {
   const [viewRegistrationModal, setViewRegistrationModal] = useState(false);
@@ -23,7 +24,11 @@ function Navigation() {
     });
   }
 
-  function uploadButtonHandler() {}
+  function uploadButtonHandler() {
+    setViewUploadModal((prevState) => {
+      return !prevState;
+    });
+  }
 
   return (
     <>
@@ -38,6 +43,13 @@ function Navigation() {
         <Portal>
           <ModalBG>
             <LoginForm formCloseHandler={loginButtonHandler} />
+          </ModalBG>
+        </Portal>
+      ) : null}
+      {viewUploadModal ? (
+        <Portal>
+          <ModalBG>
+            <UploadForm formCloseHandler={uploadButtonHandler} />
           </ModalBG>
         </Portal>
       ) : null}
