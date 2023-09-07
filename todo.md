@@ -4,7 +4,9 @@
 
 - [ ] Search
 - [ ] Upload
-
+- [ ] Download
+- [ ] Register
+- [ ] Login
 
 ## Bugs
 
@@ -12,23 +14,22 @@
 
 ### Prototype
 
-- [X] homepage
-  - [x] navigation
-  - [x] hero section
-  - [x] search section
-  - [x] footer
-- [ ] upload page
-  - [ ] hero section
-  - [ ] upload form
+- [X] Homepage
+  - [x] Navigation
+  - [x] Hero section
+  - [x] Search section
+  - [x] Footer
+- [X] Upload modal
+- [X] Download modal
+- [X] Login/register modal
 
 ### Final
 
-- [X] homepage
-  - [X] navigation
-  - [X] hero section
-  - [X] search section
-  - [X] footer
-- [ ] upload page
-  - [ ] hero section
-  - [ ] upload form
-  
+- [X] Homepage
+  - [X] Navigation
+  - [X] Hero section
+  - [X] Search section
+  - [X] Footer
+- [ ] Upload modal
+- [ ] Download modal
+- [ ] Login/register modal
