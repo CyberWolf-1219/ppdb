@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '../Logo/Logo';
 import Button from '../Button/Button';
 
 function Navigation() {
+  const [viewRigistrationModal, setViewRigistrationModal] = useState(false);
+  const [viewLoginModal, setViewLoginModal] = useState(false);
+  const [viewUploadModal, setViewUploadModal] = useState(false);
+
+  function registerButtonHandler() {}
+
+  function loginButtonHandler() {}
+
+  function uploadButtonHandler() {}
+
   return (
     <nav className={'w-full h-fit px-[1rem] py-[1rem] border-b-[2px]'}>
       <div className={'flex flex-col md:flex-row items-center justify-between'}>
@@ -17,7 +27,7 @@ function Navigation() {
                 type={'secondary'}
                 width={'full'}
                 textSize={'md'}
-                action={() => {}}>
+                action={registerButtonHandler}>
                 Register
               </Button>
             </li>
@@ -26,7 +36,7 @@ function Navigation() {
                 type={'secondary'}
                 width={'full'}
                 textSize={'md'}
-                action={() => {}}>
+                action={loginButtonHandler}>
                 Login
               </Button>
             </li>
@@ -37,7 +47,7 @@ function Navigation() {
               width={'full'}
               textSize={'md'}
               fontWeight={'bold'}
-              action={() => {}}>
+              action={uploadButtonHandler}>
               Upload
             </Button>
           </li>
