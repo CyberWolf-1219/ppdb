@@ -1,4 +1,4 @@
-import React, { type ReactNode } from 'react';
+import React, { type ReactNode, type UIEvent } from 'react';
 
 const WIDTH_OPTIONS = {
   fit: 'w-fit',
@@ -17,7 +17,7 @@ const TEXT_SIZE_OPTIONS = {
 };
 
 const FONT_WEIGHT_OPTIONS = {
-  thing: '!font-thin',
+  thin: '!font-thin',
   normal: '!font-normal',
   bold: '!font-bold',
 };
@@ -39,7 +39,8 @@ function Button({
   action,
   children,
 }: Props) {
-  function clickHandler() {
+  function clickHandler(e: UIEvent) {
+    e.preventDefault();
     action();
   }
 
