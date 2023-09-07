@@ -154,6 +154,25 @@ const { title } = Astro.props;
     }
   } */
 
+  input,
+  select {
+    padding: 0.5em 0.25em;
+    border-radius: 0.125rem;
+    leading: 100%;
+    font-size: 1.25rem;
+  }
+
+  input[type='file']::-webkit-file-upload-button {
+    width: fit-content;
+    height: fit-content;
+    padding: 0.5em 1em;
+    leading: 100%;
+    background-color: var(--accent);
+    border-color: transparent;
+    color: white;
+    border-radius: 0.125rem;
+  }
+
   /* For extremely small screen devices (595px and below) */
   @media only screen and (max-width: 375px) {
     html {
