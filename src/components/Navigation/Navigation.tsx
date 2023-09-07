@@ -4,6 +4,7 @@ import Button from '../Button/Button';
 import Portal from '../Portal/Portal';
 import ModalBG from '../ModalBG/ModalBG';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
+import LoginForm from '../LoginForm/LoginForm';
 
 function Navigation() {
   const [viewRegistrationModal, setViewRegistrationModal] = useState(false);
@@ -16,7 +17,11 @@ function Navigation() {
     });
   }
 
-  function loginButtonHandler() {}
+  function loginButtonHandler() {
+    setViewLoginModal((prevState) => {
+      return !prevState;
+    });
+  }
 
   function uploadButtonHandler() {}
 
@@ -29,7 +34,13 @@ function Navigation() {
           </ModalBG>
         </Portal>
       ) : null}
-
+      {viewLoginModal ? (
+        <Portal>
+          <ModalBG>
+            <LoginForm formCloseHandler={loginButtonHandler} />
+          </ModalBG>
+        </Portal>
+      ) : null}
       <nav className={'w-full h-fit px-[1rem] py-[1rem] border-b-[2px]'}>
         <div
           className={'flex flex-col md:flex-row items-center justify-between'}>
