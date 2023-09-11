@@ -3,10 +3,20 @@
 ## Implement
 
 - [ ] Search
+  - [ ] Build Search ENDPOINT
+  - [ ] Connect ENDPOINT
 - [ ] Upload
+  - [ ] Build Upload ENDPOINT
+  - [ ] Connect ENDPOINT
 - [ ] Download
+  - [ ] Build Download ENDPOINT
+  - [ ] Connect ENDPOINT
 - [ ] Register
+  - [ ] Build Register ENDPOINT
+  - [ ] Connect ENDPOINT
 - [ ] Login
+  - [ ] Build Login ENDPOINT
+  - [ ] Connect ENDPOINT
 
 ## Bugs
 
