@@ -6,7 +6,7 @@
   - [ ] Build Search ENDPOINT
   - [ ] Connect ENDPOINT
 - [ ] Upload
-  - [ ] Build Upload ENDPOINT
+  - [X] Build Upload ENDPOINT
   - [ ] Connect ENDPOINT
 - [ ] Download
   - [ ] Build Download ENDPOINT
