@@ -59,7 +59,7 @@ function Navigation() {
           <Logo />
           <ul
             className={
-              'w-full md:max-w-[50%] lg:max-w-[40%] mt-[1rem] md:m-[0] flex flex-col md:flex-row items-center justify-center gap-[1rem]'
+              'w-full md:max-w-[60%] lg:max-w-[40%] mt-[1rem] md:m-[0] flex flex-col md:flex-row items-center justify-center gap-[1rem]'
             }>
             <div
               className={'w-full h-fit flex flex-row item-center gap-[1rem]'}>
