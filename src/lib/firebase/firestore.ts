@@ -1,8 +1,7 @@
-import { getFirestore, doc, addDoc, getDoc, deleteDoc, updateDoc, collection, query, where, getDocs } from 'firebase/firestore'
+import { getFirestore, doc, getDoc, collection, setDoc } from 'firebase/firestore'
 import { app } from "./client";
 
 const firestore = getFirestore(app)
-
 
 
 export class PastPaperEntry {
@@ -24,8 +23,9 @@ export class PastPaperEntry {
         if (!this.filePath) {
             throw new Error('[-] Cloud File Path Needed to Save the Entry!')
         } else {
+            const docRef = doc(this.paperCollection, `${this.year}_${this.exam}_${this.subject}`)
 
-            const result = await addDoc(this.paperCollection, { year: this.year, exam: this.exam, subject: this.subject, file: this.filePath })
+            const result = setDoc(docRef, { files: [ this.filePath ] });
 
             return result;
         }
@@ -37,7 +37,6 @@ export class PastPaperEntry {
         }
 
         const result = await getDoc(doc(this.paperCollection, `${this.year}_${this.exam}_${this.subject}`))
-
         return result.data();
     }
 }
