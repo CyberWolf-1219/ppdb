@@ -7,7 +7,7 @@
   - [ ] Connect ENDPOINT
 - [ ] Upload
   - [X] Build Upload ENDPOINT
-  - [ ] Connect ENDPOINT
+  - [X] Connect ENDPOINT
 - [ ] Download
   - [ ] Build Download ENDPOINT
   - [ ] Connect ENDPOINT
@@ -40,6 +40,6 @@
   - [X] Hero section
   - [X] Search section
   - [X] Footer
-- [ ] Upload modal
+- [X] Upload modal
 - [ ] Download modal
 - [ ] Login/register modal
