@@ -17,6 +17,7 @@ export const GET: APIRoute = async ({ request }) => {
         const dbEntry = new PastPaperEntry(year, exam, subject);
 
         const result = await dbEntry.search()
+        console.log(result)
 
         if (!result) {
             return new Response(null, { status: 404, statusText: "[-] File Not Found in the Cloud!" })
