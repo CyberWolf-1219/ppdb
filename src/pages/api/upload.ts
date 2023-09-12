@@ -50,7 +50,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
 
 async function uploadFile(pdfFile: File) {
-    const cloudFile = new fileRef(randomstring.generate(60), pdfFile.type);
+    const cloudFile = new fileRef(randomstring.generate(20), pdfFile.type);
     return await cloudFile.uploadFile(await pdfFile.arrayBuffer());
 }
 
