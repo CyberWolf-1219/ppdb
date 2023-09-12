@@ -2,8 +2,9 @@ import {
   getStorage,
   ref,
   uploadBytes,
-  type StorageReference,
+  getDownloadURL
 } from 'firebase/storage';
+import type { StorageReference } from 'firebase/storage';
 import { app } from './client';
 
 const storage = getStorage(app);
@@ -38,4 +39,10 @@ export class fileRef {
   public async removeFile() { }
 
   public async updateFile() { }
+
+  static async getFile(filePath: string) {
+    const _fileRef = ref(storage, filePath);
+    const downloadUrlResult = await getDownloadURL(_fileRef);
+    return downloadUrlResult;
+  }
 }
