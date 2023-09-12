@@ -47,7 +47,7 @@ function Button({
   return (
     <button
       onClick={clickHandler}
-      className={`${WIDTH_OPTIONS[width]} h-fit px-[2em] py-[0.75em] border-[2px] ${TYPE_OPTIONS[type]} font-semibold ${TEXT_SIZE_OPTIONS[textSize]} ${FONT_WEIGHT_OPTIONS[fontWeight]} rounded-sm leading-[100%]`}>
+      className={`${WIDTH_OPTIONS[width]} h-fit px-[2em] py-[0.75em] border-[2px] ${TYPE_OPTIONS[type]} ${TEXT_SIZE_OPTIONS[textSize]} ${FONT_WEIGHT_OPTIONS[fontWeight]} rounded-sm leading-[100%]`}>
       {children}
     </button>
   );
