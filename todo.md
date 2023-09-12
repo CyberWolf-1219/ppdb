@@ -9,7 +9,7 @@
   - [X] Build Upload ENDPOINT
   - [X] Connect ENDPOINT
 - [ ] Download
-  - [ ] Build Download ENDPOINT
+  - [X] Build Download ENDPOINT
   - [ ] Connect ENDPOINT
 - [ ] Register
   - [ ] Build Register ENDPOINT
@@ -19,6 +19,10 @@
   - [ ] Connect ENDPOINT
 
 ## Bugs
+
+### File Upload
+
+- [ ] Make it possible to upload multiple files for a single subject
 
 ## UI
 
