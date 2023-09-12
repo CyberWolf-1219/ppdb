@@ -76,6 +76,7 @@ function UploadForm({ formCloseHandler }: Props) {
         <select
           name='exam'
           id='select_exam'
+          defaultValue={'dummy'}
           className={
             'w-full h-fit px-[0.5em] py-[0.25em] text-[1.25rem] leading-[100%] border-[2px] rounded-sm'
           }
@@ -85,15 +86,16 @@ function UploadForm({ formCloseHandler }: Props) {
             disabled={true}>
             SELECT AN EXAM
           </option>
-          <option value='grade-5'>Grade 5</option>
-          <option value='gce-ol'>GCE O/L</option>
-          <option value='gce-al'>GCE A/L</option>
+          <option value='5'>Grade 5</option>
+          <option value='ol'>GCE O/L</option>
+          <option value='al'>GCE A/L</option>
         </select>
 
         <label htmlFor='select_subject'>Select the Subject: </label>
         <select
           name='subject'
           id='select_subject'
+          defaultValue={'dummy'}
           className={
             'w-full h-fit px-[0.5em] py-[0.25em] text-[1.25rem] leading-[100%] border-[2px] rounded-sm'
           }>
