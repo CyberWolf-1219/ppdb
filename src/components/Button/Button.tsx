@@ -27,7 +27,7 @@ interface Props {
   width: keyof typeof WIDTH_OPTIONS;
   textSize: keyof typeof TEXT_SIZE_OPTIONS;
   fontWeight?: keyof typeof FONT_WEIGHT_OPTIONS;
-  action: Function;
+  action: (e: UIEvent) => void;
   children: ReactNode;
 }
 
@@ -39,14 +39,9 @@ function Button({
   action,
   children,
 }: Props) {
-  function clickHandler(e: UIEvent) {
-    e.preventDefault();
-    action();
-  }
-
   return (
     <button
-      onClick={clickHandler}
+      onClick={action}
       className={`${WIDTH_OPTIONS[width]} h-fit px-[2em] py-[0.75em] border-[2px] ${TYPE_OPTIONS[type]} ${TEXT_SIZE_OPTIONS[textSize]} ${FONT_WEIGHT_OPTIONS[fontWeight]} rounded-sm leading-[100%]`}>
       {children}
     </button>
