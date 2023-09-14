@@ -7,6 +7,6 @@ import SearchSection from '../components/SearchSection/SearchSection';
 <Layout title='Welcome to Astro.'>
   <main>
     <HeroSection />
-    <SearchSection />
+    <SearchSection client:load={true} />
   </main>
 </Layout>

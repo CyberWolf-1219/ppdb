@@ -4,7 +4,7 @@
 
 - [ ] Search
   - [X] Build Search ENDPOINT
-  - [ ] Connect ENDPOINT
+  - [X] Connect ENDPOINT
 - [ ] Upload
   - [X] Build Upload ENDPOINT
   - [X] Connect ENDPOINT
