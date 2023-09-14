@@ -22,7 +22,7 @@
 
 ### File Upload
 
-- [ ] Make it possible to upload multiple files for a single subject
+- [X] Make it possible to upload multiple files for a single subject
 
 ## UI
 

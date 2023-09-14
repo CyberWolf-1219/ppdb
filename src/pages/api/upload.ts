@@ -14,10 +14,10 @@ export const POST: APIRoute = async ({ request, cookies }) => {
     }
 
     try {
+        console.log('[i] NEW UPLOAD REQUEST')
         const requestBody = await request.formData();
 
-        console.log(requestBody)
-
+        console.log('[i] PULLING DATA FROM THE REQUEST')
         const year = parseInt(requestBody.get('year') as string);
         const exam = requestBody.get('exam') as string;
         const subject = requestBody.get('subject') as string;
@@ -26,11 +26,19 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         console.table({ year, exam, subject, pdfFile });
 
         if (pdfFile) {
+            console.log('[i] UPLOADING FILE TO THE CLOUD')
             const fileUploadResult = await uploadFile(pdfFile)
-            console.log(fileUploadResult);
 
+            console.log('[i] FILE UPLOAD RESULT'.padEnd(80, '='))
+            console.log(fileUploadResult);
+            console.log(''.padEnd(80, '='))
+
+            console.log('[i] ADDING ENTRY TO THE DATABASE')
             const dbEntryResult = await addDBEntry(year, exam, subject, fileUploadResult.ref.fullPath)
+
+            console.log('[i] DB ENTRY ADD RESULT'.padEnd(80, '='))
             console.log(dbEntryResult)
+            console.log(''.padEnd(80, '='))
 
             return new Response(JSON.stringify(dbEntryResult), { status: 201, statusText: '[+] Paper Successfully Added to the Database' })
 
