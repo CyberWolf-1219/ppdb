@@ -3,7 +3,7 @@
 ## Implement
 
 - [ ] Search
-  - [ ] Build Search ENDPOINT
+  - [X] Build Search ENDPOINT
   - [ ] Connect ENDPOINT
 - [ ] Upload
   - [X] Build Upload ENDPOINT
