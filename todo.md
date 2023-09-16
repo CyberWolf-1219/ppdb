@@ -2,21 +2,21 @@
 
 ## Implement
 
-- [ ] Search
+- [X] Search
   - [X] Build Search ENDPOINT
   - [X] Connect ENDPOINT
-- [ ] Upload
+- [X] Upload
   - [X] Build Upload ENDPOINT
   - [X] Connect ENDPOINT
 - [ ] Download
   - [X] Build Download ENDPOINT
   - [ ] Connect ENDPOINT
-- [ ] Register
-  - [ ] Build Register ENDPOINT
-  - [ ] Connect ENDPOINT
-- [ ] Login
-  - [ ] Build Login ENDPOINT
-  - [ ] Connect ENDPOINT
+- [X] Register
+  - [X] Build Register ENDPOINT
+  - [X] Connect ENDPOINT
+- [X] Login
+  - [X] Build Login ENDPOINT
+  - [X] Connect ENDPOINT
 
 ## Bugs
 
@@ -26,7 +26,7 @@
 
 ### Registration Form
 
-- [ ] Fix Response Status Dispaly
+- [X] Fix Response Status Dispaly
 
 ## UI
 
@@ -38,6 +38,7 @@
   - [x] Search section
   - [x] Footer
 - [X] Upload modal
+  - [ ] Add PDF File Preview Image Field
 - [X] Download modal
 - [X] Login/register modal
 
@@ -49,5 +50,6 @@
   - [X] Search section
   - [X] Footer
 - [X] Upload modal
+  - [ ] Add PDF File Preview Image Field
 - [ ] Download modal
-- [ ] Login/register modal
+- [X] Login/register modal
