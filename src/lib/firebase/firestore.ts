@@ -10,13 +10,17 @@ export class PastPaperEntry {
     private year: number | null;
     private exam: string | null;
     private subject: string | null;
+    private email: string | null;
     private filePath: string | null;
+    private imagePath: string | null;
 
-    constructor(year: number, exam: string, subject: string, cloudStoreFilePath?: string) {
+    constructor(year: number, exam: string, subject: string, email: string, cloudStoreFilePath: string, cloudStoreImageFilePath: string) {
         this.year = year;
         this.exam = exam;
         this.subject = subject
+        this.email = email
         this.filePath = cloudStoreFilePath || "";
+        this.imagePath = cloudStoreImageFilePath || "";
         this.paperCollection = collection(paperDB, 'papers');
     }
 
@@ -37,11 +41,11 @@ export class PastPaperEntry {
         if (document.exists()) {
             console.log('[i] THIS DOCUMENT ALREADY EXISTS ON THE CLOUD')
             const cloudFile = doc(this.paperCollection, this.generateFullName());
-            const docUpdateResult = await updateDoc(cloudFile, { files: arrayUnion(this.filePath) });
+            const docUpdateResult = await updateDoc(cloudFile, { files: arrayUnion({ email: this.email, pdf: this.filePath, image: this.imagePath }) });
             return docUpdateResult;
         } else {
             console.log('[i] CREATING A NEW DOCUMENT ON THE CLOUD')
-            const docAddResult = await setDoc(docRef, { files: [ this.filePath ] });
+            const docAddResult = await setDoc(docRef, { files: [ { email: this.email, pdf: this.filePath, image: this.imagePath } ] });
             return docAddResult;
         }
     }
