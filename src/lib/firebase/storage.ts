@@ -9,7 +9,7 @@ import { app } from './client';
 
 const storage = getStorage(app);
 
-export class fileRef {
+export class ScreenshotRef {
   private file: StorageReference | null = null;
   private fileName: string;
   private fileType: string;
@@ -23,7 +23,45 @@ export class fileRef {
   }
 
   private generateFullFileName() {
-    return this.fileName + '.' + this.fileType.split('/')[ 1 ]
+    return 'screenshots/' + this.fileName + '.' + this.fileType.split('/')[ 1 ]
+  }
+
+  public async uploadFile(pdfFile: ArrayBuffer) {
+    if (!this.file) {
+      throw new Error('[-] File Ref Not Found!');
+    }
+
+    const result = await uploadBytes(this.file, pdfFile, { contentType: this.fileType });
+
+    return result;
+  }
+
+  public async removeFile() { }
+
+  public async updateFile() { }
+
+  static async getFile(filePath: string) {
+    const _fileRef = ref(storage, filePath);
+    const downloadUrlResult = await getDownloadURL(_fileRef);
+    return downloadUrlResult;
+  }
+}
+
+export class FileRef {
+  private file: StorageReference | null = null;
+  private fileName: string;
+  private fileType: string;
+
+  constructor(fileName: string, fileType: string) {
+    this.fileName = fileName;
+    this.fileType = fileType;
+
+    this.file = ref(storage, this.generateFullFileName());
+    console.log('New Cloud File Ref Created: ', this.generateFullFileName());
+  }
+
+  private generateFullFileName() {
+    return 'pdfs/' + this.fileName + '.' + this.fileType.split('/')[ 1 ]
   }
 
   public async uploadFile(pdfFile: ArrayBuffer) {
