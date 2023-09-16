@@ -1,13 +1,54 @@
-import React from 'react';
+import React, { useRef, useState, useCallback } from 'react';
+import type { UIEvent, FormEvent } from 'react';
 import Button from '../Button/Button';
 
 interface Props {
-  formCloseHandler: Function;
+  formCloseHandler: () => void;
 }
 
 function LoginForm({ formCloseHandler }: Props) {
-  return (
+  const emailInput = useRef<HTMLInputElement>(null);
+  const passwordInput = useRef<HTMLInputElement>(null);
+
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const login = useCallback(async (e: FormEvent) => {
+    e.preventDefault();
+    setIsProcessing(true);
+
+    const fd = new FormData();
+
+    fd.append('email', emailInput.current!.value);
+    fd.append('password', passwordInput.current!.value);
+
+    const response = await fetch('/api/login', { method: 'POST', body: fd });
+    const result = await response.json();
+    console.log(result);
+
+    if (response.ok) {
+      formCloseHandler();
+    }
+
+    setIsProcessing(false);
+  }, []);
+
+  function formCloseButtonHandler(e: UIEvent) {
+    e.preventDefault();
+    formCloseHandler();
+  }
+
+  return isProcessing ? (
+    <>
+      <div className={'w-fit h-fit p-[1rem] rounded-sm bg-white border-[2px]'}>
+        <img
+          src='/upload_animation.gif'
+          alt='upload animation'
+        />
+      </div>
+    </>
+  ) : (
     <form
+      onSubmit={login}
       action=''
       className={'w-fit h-fit p-[1rem] bg-white rounded-sm'}>
       <p className={'mt-[2rem] mb-[1rem] text-center text-3xl font-bold'}>
@@ -20,6 +61,7 @@ function LoginForm({ formCloseHandler }: Props) {
         <legend>Enter Your Details</legend>
         <label htmlFor='input_email'>Email Address: </label>
         <input
+          ref={emailInput}
           type='email'
           name='email'
           id='input_email'
@@ -30,6 +72,7 @@ function LoginForm({ formCloseHandler }: Props) {
         />
         <label htmlFor='input_password'>Account Password: </label>
         <input
+          ref={passwordInput}
           type='password'
           name='password'
           id='input_password'
@@ -53,7 +96,7 @@ function LoginForm({ formCloseHandler }: Props) {
             textSize={'lg'}
             width={'full'}
             fontWeight={'normal'}
-            action={formCloseHandler}>
+            action={formCloseButtonHandler}>
             Cancel
           </Button>
         </div>

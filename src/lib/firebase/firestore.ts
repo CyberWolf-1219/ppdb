@@ -1,7 +1,8 @@
-import { getFirestore, doc, getDoc, collection, setDoc, updateDoc, arrayUnion } from 'firebase/firestore'
+import { getFirestore, doc, getDoc, collection, setDoc, updateDoc, arrayUnion, CollectionReference, addDoc } from 'firebase/firestore'
 import { app } from "./client";
 
-const firestore = getFirestore(app)
+const paperDB = getFirestore(app)
+const userDB = getFirestore(app)
 
 
 export class PastPaperEntry {
@@ -16,7 +17,7 @@ export class PastPaperEntry {
         this.exam = exam;
         this.subject = subject
         this.filePath = cloudStoreFilePath || "";
-        this.paperCollection = collection(firestore, 'papers');
+        this.paperCollection = collection(paperDB, 'papers');
     }
 
     private generateFullName() {
@@ -45,7 +46,6 @@ export class PastPaperEntry {
         }
     }
 
-
     async search() {
         if (this.year == null || this.exam == null || this.subject == null) {
             throw new Error('[-] Need All Parameters to Perform the Search!')
@@ -54,4 +54,43 @@ export class PastPaperEntry {
         const result = await getDoc(doc(this.paperCollection, `${this.year}_${this.exam}_${this.subject}`))
         return result;
     }
+}
+
+export class UserEntry {
+    private email: string;
+    private password: string | null;
+    private userCollection: CollectionReference;
+
+    constructor(email: string, password?: string) {
+        this.email = email;
+        this.password = password ?? null;
+        this.userCollection = collection(userDB, 'users');
+    }
+
+    async checkExistance() {
+        if (!this.email || !this.password) {
+            throw new Error('[-] REQUIRED EMAIL & PASSWORD')
+        }
+
+        const docRef = doc(this.userCollection, this.email);
+        const document = await getDoc(docRef)
+        return document.exists()
+    }
+
+    async save(): Promise<1 | 0> {
+        const docRef = doc(this.userCollection, this.email);
+        await setDoc(docRef, { password: this.password })
+
+        return 0;
+    }
+
+    async search() {
+        const docRef = doc(this.userCollection, this.email);
+        const document = await getDoc(docRef);
+        return document;
+    }
+
+    async delete() { }
+
+    async update() { }
 }
