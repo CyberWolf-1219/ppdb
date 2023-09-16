@@ -1,11 +1,17 @@
-import React, { useRef, useState, type FormEvent } from 'react';
+import React, { useRef, useState, type FormEvent, type UIEvent } from 'react';
 import Button from '../Button/Button';
+import { useCookies } from 'react-cookie';
 
 interface Props {
-  formCloseHandler: Function;
+  formCloseHandler: (e: UIEvent) => void;
 }
 
 function UploadForm({ formCloseHandler }: Props) {
+  const [cookies, setCookie, removeCookie] = useCookies([
+    'logged-in',
+    'user-email',
+  ]);
+
   const form = useRef<HTMLFormElement>(null);
 
   const [isSending, setIsSending] = useState(false);
@@ -36,16 +42,49 @@ function UploadForm({ formCloseHandler }: Props) {
     XHR.send(fd);
   }
 
-  return isSending ? (
-    <>
+  if (!cookies['logged-in'] || cookies['logged-in'] !== 1) {
+    return (
+      <div className={'w-fit h-fit p-[1rem] rounded-sm bg-white border-[2px]'}>
+        <p
+          className={
+            'w-full h-fit mt-[2rem] mb-[1rem] text-3xl font-bold text-center'
+          }>
+          OOPs
+        </p>
+        <img
+          src='/not-loggedin.gif'
+          alt='not logged in animation'
+        />
+        <p
+          className={
+            'w-full h-fit p-[1rem] text-yellow-500 text-center font-bold bg-yellow-500/30 border-[2px] border-yellow-500'
+          }>
+          You Are Not Logged In to Upload
+        </p>
+        <Button
+          type={'secondary'}
+          textSize={'lg'}
+          width={'full'}
+          fontWeight={'normal'}
+          action={formCloseHandler}>
+          Close
+        </Button>
+      </div>
+    );
+  }
+
+  if (isSending) {
+    return (
       <div className={'w-fit h-fit p-[1rem] rounded-sm bg-white border-[2px]'}>
         <img
           src='/upload_animation.gif'
           alt='upload animation'
         />
       </div>
-    </>
-  ) : (
+    );
+  }
+
+  return (
     <form
       ref={form}
       onSubmit={submitHandler}
@@ -59,7 +98,11 @@ function UploadForm({ formCloseHandler }: Props) {
           'w-fit h-fit p-[1rem] flex flex-col items-start justify-start border-[2px] rounded-sm'
         }>
         <legend>Enter Paper Details</legend>
-
+        <input
+          type='hidden'
+          name='email'
+          value={cookies['user-email']}
+        />
         <label htmlFor='input_exam-year'>Exam Year: </label>
         <input
           type='number'
@@ -67,7 +110,7 @@ function UploadForm({ formCloseHandler }: Props) {
           id='input_exam-year'
           min={2000}
           className={
-            'w-full h-fit px-[0.5em] py-[0.25em] text-[1.25rem] leading-[100%] border-[2px] rounded-sm'
+            'w-full h-fit mb-[1rem] px-[0.5em] py-[0.25em] text-[1.25rem] leading-[100%] border-[2px] rounded-sm'
           }
           required={true}
         />
@@ -78,7 +121,7 @@ function UploadForm({ formCloseHandler }: Props) {
           id='select_exam'
           defaultValue={'dummy'}
           className={
-            'w-full h-fit px-[0.5em] py-[0.25em] text-[1.25rem] leading-[100%] border-[2px] rounded-sm'
+            'w-full h-fit mb-[1rem] px-[0.5em] py-[0.25em] text-[1.25rem] leading-[100%] border-[2px] rounded-sm'
           }
           required={true}>
           <option
@@ -97,7 +140,7 @@ function UploadForm({ formCloseHandler }: Props) {
           id='select_subject'
           defaultValue={'dummy'}
           className={
-            'w-full h-fit px-[0.5em] py-[0.25em] text-[1.25rem] leading-[100%] border-[2px] rounded-sm'
+            'w-full h-fit mb-[1rem] px-[0.5em] py-[0.25em] text-[1.25rem] leading-[100%] border-[2px] rounded-sm'
           }>
           <option
             value='dummy'
@@ -111,6 +154,19 @@ function UploadForm({ formCloseHandler }: Props) {
           <option value='science'>Science</option>
         </select>
 
+        <label htmlFor='file_exam-paper-screenshot'>
+          Select A Screenshot of the File:
+        </label>
+        <input
+          type='file'
+          name='screenshot'
+          id='file_exam-paper-screenshot'
+          accept={'.jpg, .jpeg, .png'}
+          className={
+            'w-full h-fit mb-[1rem] px-[0.5em] py-[0.25em] text-[1.25em] leading-[100%] border-[2px] rounded-sm'
+          }
+          required={true}
+        />
         <label htmlFor='file_exam-paper'>Select the Document:</label>
         <input
           type='file'
@@ -118,7 +174,7 @@ function UploadForm({ formCloseHandler }: Props) {
           id='file_exam-paper'
           accept={'.pdf'}
           className={
-            'w-full h-fit px-[0.5em] py-[0.25em] text-[1.25em] leading-[100%] border-[2px] rounded-sm'
+            'w-full h-fit mb-[1rem] px-[0.5em] py-[0.25em] text-[1.25em] leading-[100%] border-[2px] rounded-sm'
           }
           required={true}
         />
