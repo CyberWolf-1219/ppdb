@@ -24,6 +24,10 @@
 
 - [X] Make it possible to upload multiple files for a single subject
 
+### Registration Form
+
+- [ ] Fix Response Status Dispaly
+
 ## UI
 
 ### Prototype
