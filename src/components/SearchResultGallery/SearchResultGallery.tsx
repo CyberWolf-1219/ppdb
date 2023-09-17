@@ -10,12 +10,13 @@ function SearchResultGallery({ SearchResults }: Props) {
   return (
     <div
       className={
-        'w-full h-fit grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-[2rem]'
+        'w-full h-fit grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-[2rem]'
       }>
       {SearchResults.map((result, i) => {
         return (
           <SearchResultCard
             key={`search_result_${i}_${Math.random()}`}
+            uploaderEmail={result.email}
             imageLink={result.image}
             downloadLink={result.pdf}
           />
