@@ -38,7 +38,7 @@
   - [x] Search section
   - [x] Footer
 - [X] Upload modal
-  - [ ] Add PDF File Preview Image Field
+  - [X] Add PDF File Preview Image Field
 - [X] Download modal
 - [X] Login/register modal
 
@@ -50,6 +50,6 @@
   - [X] Search section
   - [X] Footer
 - [X] Upload modal
-  - [ ] Add PDF File Preview Image Field
+  - [X] Add PDF File Preview Image Field
 - [ ] Download modal
 - [X] Login/register modal
