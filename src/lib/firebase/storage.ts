@@ -40,7 +40,7 @@ export class ScreenshotRef {
 
   public async updateFile() { }
 
-  static async getFile(filePath: string) {
+  static async getDownloadLink(filePath: string) {
     const _fileRef = ref(storage, filePath);
     const downloadUrlResult = await getDownloadURL(_fileRef);
     return downloadUrlResult;
@@ -78,7 +78,7 @@ export class FileRef {
 
   public async updateFile() { }
 
-  static async getFile(filePath: string) {
+  static async getDownloadLink(filePath: string) {
     const _fileRef = ref(storage, filePath);
     const downloadUrlResult = await getDownloadURL(_fileRef);
     return downloadUrlResult;
