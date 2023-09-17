@@ -27,7 +27,7 @@ interface Props {
   width: keyof typeof WIDTH_OPTIONS;
   textSize: keyof typeof TEXT_SIZE_OPTIONS;
   fontWeight?: keyof typeof FONT_WEIGHT_OPTIONS;
-  action: (e: UIEvent) => void;
+  action: (e: UIEvent) => void | Promise<void>;
   children: ReactNode;
 }
 
