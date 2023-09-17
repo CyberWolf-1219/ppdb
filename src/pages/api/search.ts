@@ -3,6 +3,7 @@ import { PastPaperEntry } from "../../lib/firebase/firestore";
 
 export const GET: APIRoute = async ({ request, redirect }) => {
     console.log('[i] NEW SEARCH REQUEST')
+    console.log('[i] PARSING URL');
     const reqURL = new URL(request.url)
 
     console.log('[i] PULLING SEARCH PARAMETERS')
@@ -18,9 +19,11 @@ export const GET: APIRoute = async ({ request, redirect }) => {
 
     if (!searchResult.exists()) {
         console.log('[i] FILE DOES NOT EXISTS')
-        return new Response(null, { status: 404, statusText: '[i] COULD NOT FIND THE FILES IN THE DATABASE' })
+        return new Response(JSON.stringify({ message: 'File Does Not Exists' }), { status: 404 })
     }
 
+    const files = searchResult.get('files');
+
     console.log('[i] FILE FOUND IN THE DATABASE');
-    return new Response(JSON.stringify(searchResult.data()));
+    return new Response(JSON.stringify(files), { status: 200 });
 }
