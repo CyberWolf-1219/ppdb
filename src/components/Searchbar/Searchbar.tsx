@@ -23,9 +23,13 @@ function Searchbar({ RecieveResults }: Props) {
     searchParams.append('subject', subject);
 
     const response = await fetch(`/api/search?${searchParams.toString()}`);
-    const result = await response.json();
-    console.log(result);
-    RecieveResults(result);
+    if (!response.ok) {
+      console.log(await response.json());
+    } else {
+      const result = await response.json();
+      console.log(result);
+      RecieveResults(result);
+    }
   }, []);
 
   return (
@@ -33,7 +37,7 @@ function Searchbar({ RecieveResults }: Props) {
       id='searchbar'
       onSubmit={search}
       className={
-        'w-full h-fit mx-auto mb-[3rem] flex flex-col md:flex-row items-center justify-center md:gap-[0.5rem] shadow-md shadow-black/30 bg-white rounded-sm overflow-hidden'
+        'w-full h-fit mx-auto mb-[3rem] flex flex-col md:flex-row items-center justify-center md:gap-[0.5rem] shadow-md shadow-black/30 bg-white rounded-[0.25rem] overflow-hidden'
       }>
       <input
         ref={yearInput}
@@ -66,7 +70,7 @@ function Searchbar({ RecieveResults }: Props) {
         className={'w-full h-fit px-[1em] py-[0.5em] text-base'}>
         <option value='english'>English</option>
         <option value='maths'>Maths</option>
-        <option value='it'>I.C.T</option>
+        <option value='ict'>I.C.T</option>
         <option value='science'>Science</option>
         <option value='commerce'>Commerce</option>
       </select>
@@ -74,6 +78,8 @@ function Searchbar({ RecieveResults }: Props) {
         type={'primary'}
         width={'full'}
         textSize={'md'}
+        fontWeight={'bold'}
+        roundness={'right'}
         action={() => {}}>
         Search
       </Button>
