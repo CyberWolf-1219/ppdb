@@ -40,10 +40,13 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 
     console.log('[i] PASSWORDS MATCH');
     const token = jwt.sign({ email: email, password: password }, 'ppdb-authenticated-user');
-    cookies.set('logged-in', '1', { path: '/' });
+
+    cookies.set('logged-in', '1', { path: '/', maxAge: 60 * 60 * 12 });
     cookies.set('user-email', email, {
-        path: '/'
+        path: '/',
+        maxAge: 60 * 60 * 12
     })
+    cookies.set('auth-token', token, { path: '/', maxAge: 60 * 60, httpOnly: true })
 
     return new Response(JSON.stringify({ message: 'OK' }), {
         status: 200, headers: {
