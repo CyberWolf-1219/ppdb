@@ -14,13 +14,17 @@ export class PastPaperEntry {
     private filePath: string | null;
     private imagePath: string | null;
 
-    constructor(year: number, exam: string, subject: string, email: string, cloudStoreFilePath: string, cloudStoreImageFilePath: string) {
-        this.year = year;
-        this.exam = exam;
-        this.subject = subject
-        this.email = email
-        this.filePath = cloudStoreFilePath || "";
-        this.imagePath = cloudStoreImageFilePath || "";
+    constructor(year: number, exam: string, subject: string);
+
+    constructor(year: number, exam: string, subject: string, email: string, cloudStoreFilePath: string, cloudStoreImageFilePath: string);
+
+    constructor(arg1: number, arg2: string, arg3: string, arg4?: string, arg5?: string, arg6?: string) {
+        this.year = arg1;
+        this.exam = arg2;
+        this.subject = arg3
+        this.email = arg4 ?? ""
+        this.filePath = arg5 ?? "";
+        this.imagePath = arg6 ?? "";
         this.paperCollection = collection(paperDB, 'papers');
     }
 
@@ -51,7 +55,7 @@ export class PastPaperEntry {
     }
 
     async search() {
-        if (this.year == null || this.exam == null || this.subject == null) {
+        if (!this.year || !this.exam || !this.subject) {
             throw new Error('[-] Need All Parameters to Perform the Search!')
         }
 
