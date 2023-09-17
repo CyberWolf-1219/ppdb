@@ -1,5 +1,5 @@
 import type { APIRoute } from 'astro';
-import { fileRef } from '../../lib/firebase/storage';
+import { FileRef, ScreenshotRef } from '../../lib/firebase/storage';
 import randomstring from 'randomstring';
 import { PastPaperEntry } from '../../lib/firebase/firestore';
 
@@ -18,51 +18,68 @@ export const POST: APIRoute = async ({ request, cookies }) => {
         const requestBody = await request.formData();
 
         console.log('[i] PULLING DATA FROM THE REQUEST')
+        const email = requestBody.get('email') as string;
         const year = parseInt(requestBody.get('year') as string);
         const exam = requestBody.get('exam') as string;
         const subject = requestBody.get('subject') as string;
-        const pdfFile = requestBody.get('file') as File;
+        const screenshot = requestBody.get('screenshot') as File;
+        const pdf = requestBody.get('file') as File;
 
-        console.table({ year, exam, subject, pdfFile });
+        console.table({ email, year, exam, subject });
+        console.log(screenshot);
+        console.log(pdf);
 
-        if (pdfFile) {
-            console.log('[i] UPLOADING FILE TO THE CLOUD')
-            const fileUploadResult = await uploadFile(pdfFile)
+        if (pdf && screenshot && email && year && exam && subject) {
+            const fileName = randomstring.generate(20);
+
+            console.log('[i] UPLOADING IMAGE FILE THE CLOUD');
+            const imageUploadResult = await uploadImage(fileName, screenshot)
+
 
             console.log('[i] FILE UPLOAD RESULT'.padEnd(80, '='))
-            console.log(fileUploadResult);
+            console.log(imageUploadResult)
+            console.log(''.padEnd(80, '='))
+
+            console.log('[i] UPLOADING PDF FILE TO THE CLOUD')
+            const pdfUploadResult = await uploadPDF(fileName, pdf)
+
+            console.log('[i] FILE UPLOAD RESULT'.padEnd(80, '='))
+            console.log(pdfUploadResult);
             console.log(''.padEnd(80, '='))
 
             console.log('[i] ADDING ENTRY TO THE DATABASE')
-            const dbEntryResult = await addDBEntry(year, exam, subject, fileUploadResult.ref.fullPath)
+            const dbEntry = new PastPaperEntry(year, exam, subject, email, pdfUploadResult.ref.fullPath, imageUploadResult.ref.fullPath);
+            const dbEntryResult = await dbEntry.save();
 
             console.log('[i] DB ENTRY ADD RESULT'.padEnd(80, '='))
             console.log(dbEntryResult)
             console.log(''.padEnd(80, '='))
 
-            return new Response(JSON.stringify(dbEntryResult), { status: 201, statusText: '[+] Paper Successfully Added to the Database' })
+            return new Response(JSON.stringify({ message: 'Paper Added to The Database Successfully' }), { status: 201 })
 
         } else {
 
             return new Response(
-                null, { status: 204, statusText: "[-] No PDF File Found!" }
+                JSON.stringify({ message: 'Please Provide All The Information' }), { status: 204 }
             );
         }
 
     } catch (e) {
         console.log(e);
-        return new Response(null, { status: 406, statusText: `[-] ${(e as Error).message}` });
+        return new Response(JSON.stringify({ message: (e as Error).message }), { status: 406 });
     }
 
 };
 
 
-async function uploadFile(pdfFile: File) {
-    const cloudFile = new fileRef(randomstring.generate(20), pdfFile.type);
-    return await cloudFile.uploadFile(await pdfFile.arrayBuffer());
+async function uploadImage(fileName: string, image: File) {
+    const imageRef = new ScreenshotRef(fileName, image.type)
+    const imageUploadResult = await imageRef.uploadFile(await image.arrayBuffer());
+    return imageUploadResult;
 }
 
-async function addDBEntry(year: number, exam: string, subject: string, cloudFilePath: string) {
-    const dbEntry = new PastPaperEntry(year, exam, subject, cloudFilePath);
-    return await dbEntry.save();
+async function uploadPDF(fileName: string, pdf: File) {
+    const fileRef = new FileRef(fileName, pdf.type);
+    const fileUploadResult = await fileRef.uploadFile(await pdf.arrayBuffer());
+    return fileUploadResult;
 }
