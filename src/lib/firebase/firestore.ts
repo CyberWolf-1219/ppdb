@@ -16,7 +16,7 @@ export class PastPaperEntry {
 
     constructor(year: number, exam: string, subject: string);
 
-    constructor(year: number, exam: string, subject: string, email: string, cloudStoreFilePath: string, cloudStoreImageFilePath: string);
+    constructor(year: number, exam: string, subject: string, email: string, pdfDownloadLink: string, imageDownloadLink: string);
 
     constructor(arg1: number, arg2: string, arg3: string, arg4?: string, arg5?: string, arg6?: string) {
         this.year = arg1;
