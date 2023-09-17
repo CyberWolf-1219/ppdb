@@ -88,6 +88,7 @@ function LoginForm({ formCloseHandler }: Props) {
             textSize={'lg'}
             width={'full'}
             fontWeight={'bold'}
+            roundness={'full'}
             action={() => {}}>
             Login
           </Button>
@@ -96,6 +97,7 @@ function LoginForm({ formCloseHandler }: Props) {
             textSize={'lg'}
             width={'full'}
             fontWeight={'normal'}
+            roundness={'full'}
             action={formCloseButtonHandler}>
             Cancel
           </Button>
