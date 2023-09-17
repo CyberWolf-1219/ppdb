@@ -33,27 +33,18 @@ export const POST: APIRoute = async ({ request, cookies }) => {
             const fileName = randomstring.generate(20);
 
             console.log('[i] UPLOADING IMAGE FILE THE CLOUD');
-            const imageUploadResult = await uploadImage(fileName, screenshot)
-
-
-            console.log('[i] FILE UPLOAD RESULT'.padEnd(80, '='))
-            console.log(imageUploadResult)
-            console.log(''.padEnd(80, '='))
+            const imageDownloadLink = await uploadImageGetDownloadLink(fileName, screenshot)
+            console.log('[i] IMAGE DOWNLOAD LINK: ', imageDownloadLink)
 
             console.log('[i] UPLOADING PDF FILE TO THE CLOUD')
-            const pdfUploadResult = await uploadPDF(fileName, pdf)
-
-            console.log('[i] FILE UPLOAD RESULT'.padEnd(80, '='))
-            console.log(pdfUploadResult);
-            console.log(''.padEnd(80, '='))
+            const pdfDownloadLink = await uploadPDFGetDownloadLink(fileName, pdf)
+            console.log('[i] FILE UPLOAD RESULT: ', pdfDownloadLink)
 
             console.log('[i] ADDING ENTRY TO THE DATABASE')
-            const dbEntry = new PastPaperEntry(year, exam, subject, email, pdfUploadResult.ref.fullPath, imageUploadResult.ref.fullPath);
+            const dbEntry = new PastPaperEntry(year, exam, subject, email, pdfDownloadLink, imageDownloadLink);
             const dbEntryResult = await dbEntry.save();
 
-            console.log('[i] DB ENTRY ADD RESULT'.padEnd(80, '='))
-            console.log(dbEntryResult)
-            console.log(''.padEnd(80, '='))
+            console.log('\n', dbEntryResult, '\n')
 
             return new Response(JSON.stringify({ message: 'Paper Added to The Database Successfully' }), { status: 201 })
 
@@ -72,14 +63,22 @@ export const POST: APIRoute = async ({ request, cookies }) => {
 };
 
 
-async function uploadImage(fileName: string, image: File) {
+async function uploadImageGetDownloadLink(fileName: string, image: File) {
+    console.log('[i] CREATING CLOUD IMAGE REF');
     const imageRef = new ScreenshotRef(fileName, image.type)
+    console.log('[i] UPLOADING IMAGE TO THE CLOUD');
     const imageUploadResult = await imageRef.uploadFile(await image.arrayBuffer());
-    return imageUploadResult;
+    console.log('\n', imageUploadResult, '\n');
+
+    return await ScreenshotRef.getDownloadLink(imageUploadResult.ref.fullPath);
 }
 
-async function uploadPDF(fileName: string, pdf: File) {
+async function uploadPDFGetDownloadLink(fileName: string, pdf: File) {
+    console.log('[i] CREATING CLOUD PDF REF');
     const fileRef = new FileRef(fileName, pdf.type);
+    console.log('[i] UPLOADING PDF TO THE CLOUD');
     const fileUploadResult = await fileRef.uploadFile(await pdf.arrayBuffer());
-    return fileUploadResult;
+    console.log('\n', fileUploadResult, '\n');
+
+    return await FileRef.getDownloadLink(fileUploadResult.ref.fullPath);
 }
