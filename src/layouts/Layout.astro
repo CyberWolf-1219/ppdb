@@ -55,7 +55,7 @@ const { title } = Astro.props;
 </html>
 <style is:global>
   :root {
-    --accent: hsl(197, 90%, 50%);
+    --accent: #0db1f2;
     --primary: hsl(0, 0%, 100%);
     --secondary: hsl(0, 0%, 17%);
     --text: rgba(0, 0, 0, 0.8);
@@ -76,12 +76,12 @@ const { title } = Astro.props;
   section {
     widht: 100%;
     height: fit-content;
-    padding: 5rem 2rem;
+    padding: 3rem 2rem;
   }
 
   section > div {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1024px;
     height: fit-content;
 
     margin: 0px auto;
@@ -89,17 +89,15 @@ const { title } = Astro.props;
 
   nav > div {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1024px;
     height: fit-content;
-
     margin: 0px auto;
   }
 
   footer > div {
     width: 100%;
-    max-width: 1280px;
+    max-width: 1024px;
     height: fit-content;
-
     margin: 0px auto;
   }
 
@@ -203,9 +201,6 @@ const { title } = Astro.props;
     .text_small {
       font-size: 0.889rem;
     }
-    section {
-      padding: 2rem 1rem;
-    }
   }
 
   /* Small screen devices (600px and above) */
@@ -237,9 +232,6 @@ const { title } = Astro.props;
     small,
     .text_small {
       font-size: 0.889rem !important;
-    }
-    section {
-      padding: 2rem 1rem;
     }
   }
 
@@ -273,9 +265,6 @@ const { title } = Astro.props;
     .text_small {
       font-size: 0.833rem !important;
     }
-    section {
-      padding: 2rem 1rem;
-    }
   }
 
   /* Big screen devices (889px and above) */
@@ -307,9 +296,6 @@ const { title } = Astro.props;
     small,
     .text_small {
       font-size: 0.8rem !important;
-    }
-    section {
-      padding: 2rem 1rem;
     }
   }
 
