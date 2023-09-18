@@ -25,6 +25,7 @@ function Searchbar({ RecieveResults }: Props) {
     const response = await fetch(`/api/search?${searchParams.toString()}`);
     if (!response.ok) {
       console.log(await response.json());
+      RecieveResults([]);
     } else {
       const result = await response.json();
       console.log(result);
