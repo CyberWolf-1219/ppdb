@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useRef } from 'react';
 import Searchbar from '../Searchbar/Searchbar';
 import SearchResultGallery from '../SearchResultGallery/SearchResultGallery';
 
@@ -10,9 +10,11 @@ export type Result = {
 
 function SearchSection() {
   const [searchResults, setSearchResults] = useState<Result[]>([]);
+  const searched = useRef(false);
 
   const getResults = useCallback((results: Object[]) => {
     setSearchResults(results as Result[]);
+    searched.current = true;
   }, []);
 
   return (
@@ -22,7 +24,10 @@ function SearchSection() {
       <div>
         <h2 className={'text-center'}>Search for past papers</h2>
         <Searchbar RecieveResults={getResults} />
-        <SearchResultGallery SearchResults={searchResults} />
+        <SearchResultGallery
+          searched={searched.current}
+          SearchResults={searchResults}
+        />
       </div>
     </section>
   );
