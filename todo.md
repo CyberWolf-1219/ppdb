@@ -39,7 +39,7 @@
   - [x] Footer
 - [X] Upload modal
   - [X] Add PDF File Preview Image Field
-- [X] Download modal
+- [ ] Download modal
 - [X] Login/register modal
 
 ### Final
