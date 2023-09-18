@@ -14,7 +14,7 @@ function Logo() {
         />
         <source
           media='(min-width:1024px)'
-          srcSet='logo/logo@3x.png  '
+          srcSet='logo/logo@3x.png'
         />
         <img
           src='logo/logo.png'
