@@ -25,7 +25,6 @@ function SubjectStreamSelector({ exam, getSubjectStream }: Props) {
           Select the Subject Stream:{' '}
         </label>
         <select
-          name='subject_stream'
           id='select_subject_stream'
           defaultValue={'art'}
           onChange={onStreamSelect}
