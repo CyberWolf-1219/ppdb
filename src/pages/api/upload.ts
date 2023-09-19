@@ -41,7 +41,7 @@ export const POST: APIRoute = async ({ request, cookies }) => {
             console.log('[i] FILE UPLOAD RESULT: ', pdfDownloadLink)
 
             console.log('[i] ADDING ENTRY TO THE DATABASE')
-            const dbEntry = new PastPaperEntry(year, exam, subject, email, pdfDownloadLink, imageDownloadLink);
+            const dbEntry = new PastPaperEntry({ year, exam, subject, email, pdfDownloadLink, imageDownloadLink });
             const dbEntryResult = await dbEntry.save();
 
             console.log('\n', dbEntryResult, '\n')
@@ -49,7 +49,6 @@ export const POST: APIRoute = async ({ request, cookies }) => {
             return new Response(JSON.stringify({ message: 'Paper Added to The Database Successfully' }), { status: 201 })
 
         } else {
-
             return new Response(
                 JSON.stringify({ message: 'Please Provide All The Information' }), { status: 204 }
             );

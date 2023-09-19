@@ -4,6 +4,14 @@ import { app } from "./client";
 const paperDB = getFirestore(app)
 const userDB = getFirestore(app)
 
+type Data = {
+    year: number;
+    exam: string;
+    subject: string;
+    email?: string;
+    pdfDownloadLink?: string;
+    imageDownloadLink?: string;
+}
 
 export class PastPaperEntry {
     private paperCollection;
@@ -14,17 +22,17 @@ export class PastPaperEntry {
     private filePath: string | null;
     private imagePath: string | null;
 
-    constructor(year: number, exam: string, subject: string);
+    constructor(data: { year: number, exam: string, subject: string });
 
-    constructor(year: number, exam: string, subject: string, email: string, pdfDownloadLink: string, imageDownloadLink: string);
+    constructor(data: { year: number, exam: string, subject: string, email: string, pdfDownloadLink: string, imageDownloadLink: string });
 
-    constructor(arg1: number, arg2: string, arg3: string, arg4?: string, arg5?: string, arg6?: string) {
-        this.year = arg1;
-        this.exam = arg2;
-        this.subject = arg3
-        this.email = arg4 ?? ""
-        this.filePath = arg5 ?? "";
-        this.imagePath = arg6 ?? "";
+    constructor(data: Data) {
+        this.year = data.year;
+        this.exam = data.exam;
+        this.subject = data.subject
+        this.email = data.email ?? ""
+        this.filePath = data.pdfDownloadLink ?? "";
+        this.imagePath = data.imageDownloadLink ?? "";
         this.paperCollection = collection(paperDB, 'papers');
     }
 
