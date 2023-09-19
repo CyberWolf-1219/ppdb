@@ -5,7 +5,7 @@ import Portal from '../Portal/Portal';
 import ModalBG from '../ModalBG/ModalBG';
 import RegistrationForm from '../RegistrationForm/RegistrationForm';
 import LoginForm from '../LoginForm/LoginForm';
-import UploadForm from '../UploadForm/UploadForm';
+import UploadForm from '../UploadWindow/UploadWindow';
 import { CookiesProvider } from 'react-cookie';
 
 function Navigation() {

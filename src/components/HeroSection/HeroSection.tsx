@@ -2,7 +2,7 @@ import React, { useCallback, useState, type UIEvent } from 'react';
 import Button from '../Button/Button';
 import Portal from '../Portal/Portal';
 import ModalBG from '../ModalBG/ModalBG';
-import UploadForm from '../UploadForm/UploadForm';
+import UploadForm from '../UploadWindow/UploadWindow';
 
 function HeroSection() {
   const [showUploadForm, setShowUploadForm] = useState(false);
