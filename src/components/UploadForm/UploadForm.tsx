@@ -1,29 +1,37 @@
 import React, {
+  useCallback,
   useRef,
   useState,
   type FormEvent,
   type UIEvent,
-  useCallback,
+  type Dispatch,
+  type SetStateAction,
 } from 'react';
-import Button from '../Button/Button';
+import type { Exam, SubjectStream } from '../../types/types';
 import { useCookies } from 'react-cookie';
+import ExamSelector from '../ExamSelector/ExamSelector';
+import SubjectStreamSelector from '../SubjectStreamSelector/SubjectStreamSelector';
+import SubjectSelectorInjector from '../SubjectSelectorInjector/SubjectSelectorInjector';
+import Button from '../Button/Button';
 
 interface Props {
   formCloseHandler: (e: UIEvent) => void;
+  getFormState: Dispatch<SetStateAction<boolean>>;
 }
 
-function UploadForm({ formCloseHandler }: Props) {
+function UploadForm({ formCloseHandler, getFormState }: Props) {
   const [cookies, setCookie, removeCookie] = useCookies([
     'logged-in',
     'user-email',
   ]);
 
+  const [exam, setExam] = useState<Exam>('5');
+  const [subjectStream, SetsubjectStream] = useState<SubjectStream>('art');
+
   const form = useRef<HTMLFormElement>(null);
 
-  const [isSending, setIsSending] = useState(false);
-
   const upload = useCallback(async (e: FormEvent) => {
-    setIsSending(true);
+    getFormState(true);
 
     e.preventDefault();
     const fd = new FormData(form.current!);
@@ -31,56 +39,8 @@ function UploadForm({ formCloseHandler }: Props) {
     const response = await fetch('/api/upload', { method: 'POST', body: fd });
     console.log(await response.json());
 
-    setIsSending(false);
+    getFormState(false);
   }, []);
-
-  if (!cookies['logged-in'] || cookies['logged-in'] !== 1) {
-    return (
-      <div
-        className={
-          'w-fit h-fit p-[1rem] rounded-[0.25rem] bg-white border-[2px]'
-        }>
-        <p
-          className={
-            'w-full h-fit mt-[2rem] mb-[0.5rem] text-3xl font-bold text-center'
-          }>
-          OOPs
-        </p>
-        <img
-          src='/not-loggedin.gif'
-          alt='not logged in animation'
-        />
-        <p
-          className={
-            'w-full h-fit p-[1rem] text-yellow-500 text-center font-bold bg-yellow-500/30 border-[2px] border-yellow-500'
-          }>
-          You Are Not Logged In to Upload
-        </p>
-        <Button
-          type={'secondary'}
-          textSize={'lg'}
-          width={'full'}
-          fontWeight={'normal'}
-          action={formCloseHandler}>
-          Close
-        </Button>
-      </div>
-    );
-  }
-
-  if (isSending) {
-    return (
-      <div
-        className={
-          'w-fit h-fit p-[1rem] rounded-[0.25rem] bg-white border-[2px]'
-        }>
-        <img
-          src='/upload_animation.gif'
-          alt='upload animation'
-        />
-      </div>
-    );
-  }
 
   return (
     <form
@@ -120,54 +80,15 @@ function UploadForm({ formCloseHandler }: Props) {
           }
           required={true}
         />
-
-        <label
-          htmlFor='select_exam'
-          className={'text-sky-900/70 font-semibold'}>
-          Select the Exam:{' '}
-        </label>
-        <select
-          name='exam'
-          id='select_exam'
-          defaultValue={'dummy'}
-          className={
-            'w-full h-fit mb-[0.5rem] px-[0.5rem] pt-[0.4rem] pb-[0.25rem] text-[1.25rem] leading-[100%] border-[2px] rounded-[0.25rem]'
-          }
-          required={true}>
-          <option
-            value='dummy'
-            disabled={true}>
-            Select An Exam
-          </option>
-          <option value='5'>Grade 5</option>
-          <option value='ol'>GCE O/L</option>
-          <option value='al'>GCE A/L</option>
-        </select>
-
-        <label
-          htmlFor='select_subject'
-          className={'text-sky-900/70 font-semibold'}>
-          Select the Subject:{' '}
-        </label>
-        <select
-          name='subject'
-          id='select_subject'
-          defaultValue={'dummy'}
-          className={
-            'w-full h-fit mb-[0.5rem] px-[0.5em] pt-[0.4rem] pb-[0.25rem] text-[1.25rem] leading-[100%] border-[2px] rounded-[0.25rem]'
-          }>
-          <option
-            value='dummy'
-            disabled={true}>
-            Select A Subject
-          </option>
-          <option value='english'>English</option>
-          <option value='sinhala'>Sinhala</option>
-          <option value='maths'>Maths</option>
-          <option value='ict'>I.C.T</option>
-          <option value='science'>Science</option>
-        </select>
-
+        <ExamSelector getExam={setExam} />
+        <SubjectStreamSelector
+          exam={exam}
+          getSubjectStream={SetsubjectStream}
+        />
+        <SubjectSelectorInjector
+          exam={exam}
+          subjectStream={subjectStream}
+        />
         <label
           htmlFor='file_exam-paper-screenshot'
           className={'text-sky-900/70 font-semibold'}>
