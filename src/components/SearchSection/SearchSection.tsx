@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import Searchbar from '../Searchbar/Searchbar';
 import SearchResultGallery from '../SearchResultGallery/SearchResultGallery';
+import ErrorBoundy from '../ErrorBoundry/ErrorBoundry';
 
 export type Result = {
   email: string;
@@ -23,11 +24,15 @@ function SearchSection() {
       className={'bg-pallet-accent/20'}>
       <div>
         <h2 className={'text-center'}>Search for past papers</h2>
-        <Searchbar RecieveResults={getResults} />
-        <SearchResultGallery
-          searched={searched.current}
-          SearchResults={searchResults}
-        />
+        <ErrorBoundy>
+          <Searchbar RecieveResults={getResults} />
+        </ErrorBoundy>
+        <ErrorBoundy>
+          <SearchResultGallery
+            searched={searched.current}
+            SearchResults={searchResults}
+          />
+        </ErrorBoundy>
       </div>
     </section>
   );
